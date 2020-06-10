@@ -29,11 +29,17 @@
         tools:layout="@layout/fragment_hello" >
         <action
             android:id="@+id/action_helloFragment_to_initialPreferences"
-            app:destination="@id/initialPreferences" />
+            app:destination="@id/initialPreferences"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/initialPreferences"
         android:name="com.example.questtask.ui.initialPreferences.InitialPreferencesFragment"
         android:label="fragment_initial_preferences"
-        tools:layout="@layout/fragment_initial_preferences" />
+        tools:layout="@layout/fragment_initial_preferences" >
+        <action
+            android:id="@+id/action_initialPreferences_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

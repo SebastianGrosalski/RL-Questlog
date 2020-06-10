@@ -50,11 +50,15 @@ class HelloFragment : Fragment() {
 
         viewModel.navigateToInitialPreferences.observe(viewLifecycleOwner, Observer {
             if(findNavController().currentDestination?.id == R.id.helloFragment && it){
+                    var name : String = binding.etName.text.toString()
+                    viewModel.setText(name)
                     this.findNavController().navigate(
                     HelloFragmentDirections.actionHelloFragmentToInitialPreferences())
                     viewModel.doneNavigating()
             }
         })
+
+
         return binding.root
     }
 }

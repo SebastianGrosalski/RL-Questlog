@@ -9,4 +9,11 @@
     <string name="tv_hello">Hallo!\nBitte verrate mir deinen Namen!</string>
     <string name="et_name_hint">Wie heißt du?</string>
     <string name="btn_okay_text">OKAY!</string>
+    <string name="workPreference">Woran möchtest du arbeiten?</string>
+    <string name="tidiness">Ordnung</string>
+    <string name="work">Arbeit</string>
+    <string name="health">Gesundheit</string>
+    <string name="fitness">Fitness</string>
+    <string name="diet">Ernährung</string>
+    <string name="knowledge">Wissen</string>
 </resources>
