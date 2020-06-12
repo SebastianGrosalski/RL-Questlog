@@ -26,6 +26,6 @@ class HelloViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun doneNavigating(){
-        _navigateToInitialPreferences.value = false
+        _navigateToInitialPreferences.value = null
     }
 }

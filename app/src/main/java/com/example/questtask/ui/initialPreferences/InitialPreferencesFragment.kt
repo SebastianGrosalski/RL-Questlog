@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -16,12 +17,22 @@ import androidx.navigation.fragment.findNavController
 import com.example.questtask.R
 import com.example.questtask.databinding.FragmentInitialPreferencesBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_initial_preferences.*
+
+private const val TIDINESS = "tidiness"
+private const val KNOWLEDGE = "knowledge"
+private const val WORK = "work"
+private const val HEALTH = "health"
+private const val FITNESS = "fitness"
+private const val DIET = "diet"
 
 class InitialPreferencesFragment : Fragment() {
 
     companion object {
         fun newInstance() = InitialPreferencesFragment()
     }
+
     private lateinit var viewModel: InitialPreferencesViewModel
     private lateinit var binding: FragmentInitialPreferencesBinding
 
@@ -42,16 +53,34 @@ class InitialPreferencesFragment : Fragment() {
             container,
             false
         )
+
         binding.viewModel = viewModel
 
         viewModel.navigate.observe(viewLifecycleOwner, Observer{
-            if(findNavController().currentDestination?.id == R.id.initialPreferences && it){
-                findNavController().navigate(
-                    InitialPreferencesFragmentDirections
-                        .actionInitialPreferencesToNavigationHome())
-
+            if(isNothingChecked())
+            {
+                Toast.makeText(this.context,
+                    resources.getString(R.string.toastMsgCb),
+                    Toast.LENGTH_SHORT).show()
+            } else {
+                if (findNavController().currentDestination?.id == R.id.initialPreferences && it) {
+                    val map = HashMap<String, Boolean>()
+                    map[TIDINESS] = binding.cbDiet.isChecked
+                    map[WORK] = binding.cbWork.isChecked
+                    map[HEALTH] = binding.cbHealth.isChecked
+                    map[KNOWLEDGE] = binding.cbKnowledge.isChecked
+                    map[FITNESS] = binding.cbFitness.isChecked
+                    map[DIET] = binding.cbDiet.isChecked
+                    viewModel.putTopics(map)
+                    findNavController().navigate(
+                        InitialPreferencesFragmentDirections
+                            .actionInitialPreferencesToNavigationHome()
+                    )
+                    viewModel.doneNavigating()
+                }
             }
         })
+
         return binding.root
     }
 
@@ -62,4 +91,11 @@ class InitialPreferencesFragment : Fragment() {
         val navBar: BottomNavigationView = (activity as AppCompatActivity).findViewById(R.id.nav_view)
         navBar.isVisible = true
     }
+    // Check whether any of the checkboxes are checked
+    private fun isNothingChecked() = (!binding.cbDiet.isChecked
+            && !binding.cbWork.isChecked
+            && !binding.cbHealth.isChecked
+            && !binding.cbKnowledge.isChecked
+            && !binding.cbFitness.isChecked
+            && !binding.cbDiet.isChecked)
 }

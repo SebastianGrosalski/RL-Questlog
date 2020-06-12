@@ -16,4 +16,6 @@
     <string name="fitness">Fitness</string>
     <string name="diet">Ernährung</string>
     <string name="knowledge">Wissen</string>
+    <string name="toastMsgCb">Du musst mindestens\neine Option auswählen!</string>
+    <string name="toastMsgName">Bitte gib einen Namen ein!</string>
 </resources>

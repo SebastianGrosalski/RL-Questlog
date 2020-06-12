@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -35,7 +36,8 @@ class HelloFragment : Fragment() {
         // Hide the App bar
         (activity as AppCompatActivity).supportActionBar?.hide()
         // Hide the BottomNavigation for this Fragment
-        val navBar: BottomNavigationView = (activity as AppCompatActivity).findViewById(R.id.nav_view)
+        val navBar: BottomNavigationView =
+            (activity as AppCompatActivity).findViewById(R.id.nav_view)
         navBar.isVisible = false
         // Get the ViewModel
         viewModel = ViewModelProvider(this).get(HelloViewModel::class.java)
@@ -49,16 +51,29 @@ class HelloFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.navigateToInitialPreferences.observe(viewLifecycleOwner, Observer {
-            if(findNavController().currentDestination?.id == R.id.helloFragment && it){
-                    var name : String = binding.etName.text.toString()
+            if (containsName()) {
+                if (findNavController().currentDestination?.id == R.id.helloFragment && it) {
+                    var name: String = binding.etName.text.toString()
                     viewModel.setText(name)
                     this.findNavController().navigate(
-                    HelloFragmentDirections.actionHelloFragmentToInitialPreferences())
+                        HelloFragmentDirections.actionHelloFragmentToInitialPreferences()
+                    )
                     viewModel.doneNavigating()
+                }
+            } else {
+                Toast.makeText(
+                    this.context,
+                    resources.getString(R.string.toastMsgName),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
 
-
         return binding.root
     }
+
+    private fun containsName() = (
+            binding.etName.text.toString().trim().isNotEmpty()
+                    || binding.etName.text.toString().trim().isNotBlank())
 }
+

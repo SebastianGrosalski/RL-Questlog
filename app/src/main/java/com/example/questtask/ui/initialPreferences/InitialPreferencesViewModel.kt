@@ -30,7 +30,10 @@ class InitialPreferencesViewModel(application: Application) : AndroidViewModel(a
         _navigate.value = null
     }
 
-    fun getName() : String?{
-       return prefProvider.getName()
+    //Puts the selected Topics into Shared preferences
+    //and sets the flag to determine whether preferences contain values
+    fun putTopics(map : HashMap<String, Boolean>){
+        prefProvider.putPreferredTopics(map)
+        prefProvider.putContainsFlag()
     }
 }

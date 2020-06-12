@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 private const val NAME = "name"
+private const val CONTAINS_PREFERENCES = "containsPreferences"
 
 class PreferenceProvider(context: Context) {
     val applicationContext = context.applicationContext
@@ -23,6 +24,17 @@ class PreferenceProvider(context: Context) {
         {
             sharedPreferences.edit().putBoolean(s, topicMap[s]!!).apply()
         }
+    }
+
+    fun putContainsFlag(){
+        sharedPreferences.edit().putBoolean(
+            CONTAINS_PREFERENCES,
+            true
+        ).apply()
+    }
+
+    fun getContainsFlag() : Boolean{
+        return sharedPreferences.getBoolean(CONTAINS_PREFERENCES, false)
     }
 
     fun getName() : String?{
