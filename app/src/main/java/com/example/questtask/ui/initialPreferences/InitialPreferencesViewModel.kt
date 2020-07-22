@@ -17,7 +17,6 @@ class InitialPreferencesViewModel(application: Application) : AndroidViewModel(a
     val navigate : LiveData<Boolean>
     get() = _navigate
 
-    private val topics = HashMap<String, Boolean>()
     private val prefProvider : PreferenceProvider = PreferenceProvider(
         application.applicationContext
     )

@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">QuestTask</string>
-    <string name="title_home">Home</string>
+    <string name="title_quests">Aufgaben</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_hello">Hallo!\nBitte verrate mir deinen Namen!</string>
     <string name="et_name_hint">Wie heißt du?</string>
@@ -18,4 +16,10 @@
     <string name="knowledge">Wissen</string>
     <string name="toastMsgCb">Du musst mindestens\neine Option auswählen!</string>
     <string name="toastMsgName">Bitte gib einen Namen ein!</string>
+    <string name="overflow_pref">Einstellungen</string>
+    <string name="save">Speichern</string>
+    <string name="name">Name</string>
+    <string name="tv_exp">"EXP: "</string>
+    <string name="defaultZero">0</string>
+    <string name="tv_lvl">"LVL: "</string>
 </resources>

@@ -1,156 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
             type="com.example.questtask.ui.initialPreferences.InitialPreferencesViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.initialPreferences.InitialPreferencesFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/workPreference"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.initialPreferences.InitialPreferencesFragment">
 
-    <TextView
-        android:id="@+id/tv_tidiness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tidiness"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_tidiness"
-        app:layout_constraintStart_toStartOf="@+id/tv_work"
-        app:layout_constraintTop_toTopOf="@+id/cb_tidiness"
-        />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/workPreference"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_work"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/work"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_work"
-        app:layout_constraintStart_toStartOf="@+id/tv_health"
-        app:layout_constraintTop_toTopOf="@+id/cb_work" />
+        <TextView
+            android:id="@+id/tv_tidiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/tidiness"
+            app:layout_constraintBottom_toTopOf="@+id/tv_work"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
 
-    <TextView
-        android:id="@+id/tv_health"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/health"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_health"
-        app:layout_constraintStart_toStartOf="@+id/tv_fitness"
-        app:layout_constraintTop_toTopOf="@+id/cb_health" />
+        <TextView
+            android:id="@+id/tv_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/work"
+            app:layout_constraintBottom_toTopOf="@+id/tv_health"
+            app:layout_constraintStart_toStartOf="@+id/tv_tidiness"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tidiness" />
 
-    <TextView
-        android:id="@+id/tv_fitness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fitness"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_fitness"
-        app:layout_constraintStart_toStartOf="@+id/tv_diet"
-        app:layout_constraintTop_toTopOf="@+id/cb_fitness" />
+        <TextView
+            android:id="@+id/tv_health"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/health"
+            app:layout_constraintBottom_toTopOf="@+id/tv_fitness"
+            app:layout_constraintStart_toStartOf="@+id/tv_work"
+            app:layout_constraintTop_toBottomOf="@+id/tv_work" />
 
-    <TextView
-        android:id="@+id/tv_diet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/diet"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_diet"
-        app:layout_constraintStart_toStartOf="@+id/tv_knowledge"
-        app:layout_constraintTop_toTopOf="@+id/cb_diet" />
+        <TextView
+            android:id="@+id/tv_fitness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fitness"
+            app:layout_constraintBottom_toTopOf="@+id/tv_diet"
+            app:layout_constraintStart_toStartOf="@+id/tv_health"
+            app:layout_constraintTop_toBottomOf="@+id/tv_health" />
 
-    <TextView
-        android:id="@+id/tv_knowledge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/knowledge"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_knowledge"
-        app:layout_constraintEnd_toEndOf="@+id/btn_okay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cb_knowledge" />
+        <TextView
+            android:id="@+id/tv_diet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/diet"
+            app:layout_constraintBottom_toTopOf="@+id/tv_knowledge"
+            app:layout_constraintStart_toStartOf="@+id/tv_fitness"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fitness" />
 
-    <CheckBox
-        android:id="@+id/cb_tidiness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_work"
-        app:layout_constraintEnd_toEndOf="@+id/cb_work"
-        />
+        <TextView
+            android:id="@+id/tv_knowledge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/knowledge"
+            app:layout_constraintBottom_toTopOf="@+id/line1"
+            app:layout_constraintStart_toStartOf="@+id/tv_diet"
+            app:layout_constraintTop_toBottomOf="@+id/tv_diet" />
 
-    <CheckBox
-        android:id="@+id/cb_work"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_health"
-        app:layout_constraintEnd_toEndOf="@+id/cb_health"
-       />
+        <CheckBox
+            android:id="@+id/cb_tidiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tidiness"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_tidiness" />
 
-    <CheckBox
-        android:id="@+id/cb_health"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_fitness"
-        app:layout_constraintEnd_toEndOf="@+id/cb_fitness"
-        />
+        <CheckBox
+            android:id="@+id/cb_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_work"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_work" />
 
-    <CheckBox
-        android:id="@+id/cb_fitness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_diet"
-        app:layout_constraintEnd_toEndOf="@+id/cb_diet"
-        />
+        <CheckBox
+            android:id="@+id/cb_health"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_health"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_health" />
 
-    <CheckBox
-        android:id="@+id/cb_diet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_knowledge"
-        app:layout_constraintEnd_toEndOf="@+id/cb_knowledge"
-        />
+        <CheckBox
+            android:id="@+id/cb_fitness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_fitness"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_fitness" />
 
-    <CheckBox
-        android:id="@+id/cb_knowledge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btn_okay"
-        app:layout_constraintStart_toEndOf="@+id/btn_okay"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        />
+        <CheckBox
+            android:id="@+id/cb_diet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_diet"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_diet" />
 
-    <Button
-        android:id="@+id/btn_okay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/btn_okay_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="@{() -> viewModel.navigate()}"/>
+        <CheckBox
+            android:id="@+id/cb_knowledge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_knowledge"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_knowledge" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="117dp" />
+        <Button
+            android:id="@+id/btn_okay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> viewModel.navigate()}"
+            android:text="@string/btn_okay_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toTopOf="@+id/btn_okay"
+            tools:layout_editor_absoluteX="0dp"></View>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:layout_editor_absoluteX="0dp"></View>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="158dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -16,16 +16,11 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.questtask.R
 import com.example.questtask.databinding.FragmentInitialPreferencesBinding
+import com.example.questtask.util.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_initial_preferences.*
 
-private const val TIDINESS = "tidiness"
-private const val KNOWLEDGE = "knowledge"
-private const val WORK = "work"
-private const val HEALTH = "health"
-private const val FITNESS = "fitness"
-private const val DIET = "diet"
 
 class InitialPreferencesFragment : Fragment() {
 
@@ -63,15 +58,8 @@ class InitialPreferencesFragment : Fragment() {
                     resources.getString(R.string.toastMsgCb),
                     Toast.LENGTH_SHORT).show()
             } else {
+                mapToPref()
                 if (findNavController().currentDestination?.id == R.id.initialPreferences && it) {
-                    val map = HashMap<String, Boolean>()
-                    map[TIDINESS] = binding.cbDiet.isChecked
-                    map[WORK] = binding.cbWork.isChecked
-                    map[HEALTH] = binding.cbHealth.isChecked
-                    map[KNOWLEDGE] = binding.cbKnowledge.isChecked
-                    map[FITNESS] = binding.cbFitness.isChecked
-                    map[DIET] = binding.cbDiet.isChecked
-                    viewModel.putTopics(map)
                     findNavController().navigate(
                         InitialPreferencesFragmentDirections
                             .actionInitialPreferencesToNavigationHome()
@@ -80,8 +68,18 @@ class InitialPreferencesFragment : Fragment() {
                 }
             }
         })
-
         return binding.root
+    }
+
+    private fun mapToPref() {
+        val map = HashMap<String, Boolean>()
+        map[TIDINESS] = binding.cbTidiness.isChecked
+        map[WORK] = binding.cbWork.isChecked
+        map[HEALTH] = binding.cbHealth.isChecked
+        map[KNOWLEDGE] = binding.cbKnowledge.isChecked
+        map[FITNESS] = binding.cbFitness.isChecked
+        map[DIET] = binding.cbDiet.isChecked
+        viewModel.putTopics(map)
     }
 
     // Make App-bar and bottom navigation visible when navigating to home-fragment
@@ -92,7 +90,8 @@ class InitialPreferencesFragment : Fragment() {
         navBar.isVisible = true
     }
     // Check whether any of the checkboxes are checked
-    private fun isNothingChecked() = (!binding.cbDiet.isChecked
+    private fun isNothingChecked() = (
+            !binding.cbDiet.isChecked
             && !binding.cbWork.isChecked
             && !binding.cbHealth.isChecked
             && !binding.cbKnowledge.isChecked
