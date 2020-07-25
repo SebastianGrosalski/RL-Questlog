@@ -10,8 +10,11 @@ interface QuestDao {
     @Insert
     fun insert(quest: Quest)
 
+    @Insert
+    fun insertAll(questList: List<Quest>)
+
     @Query("SELECT * FROM quest_table")
-    fun getAll(): LiveData<List<Quest>>
+    fun getAllQuests(): LiveData<List<Quest>>
 
     @Query("SELECT * FROM quest_table WHERE accepted = 0")
     fun getUnaccepted() : LiveData<List<Quest>>
@@ -21,4 +24,6 @@ interface QuestDao {
 
     @Query("SELECT * FROM quest_table WHERE topic LIKE :topic")
     fun getTopic(topic : String) : LiveData<List<Quest>>
+
+
 }
