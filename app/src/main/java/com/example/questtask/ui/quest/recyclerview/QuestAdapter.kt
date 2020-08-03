@@ -3,38 +3,62 @@ package com.example.questtask.ui.quest.recyclerview
 import com.example.questtask.util.*
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questtask.R
+import com.example.questtask.databinding.QuestItemBinding
 import com.example.questtask.repository.room.Quest
 
-class QuestAdapter : RecyclerView.Adapter<QuestViewHolder>() {
-    var data = listOf<Quest>()
-    set(value){
-        field = value
-        notifyDataSetChanged()
-    }
-    override fun getItemCount(): Int {
-        return data.size
-    }
+class QuestAdapter(val clickListener : QuestListener) : ListAdapter<Quest, QuestAdapter.QuestViewHolder>(QuestDiffCallBack()) {
 
     override fun onBindViewHolder(holder: QuestViewHolder, position: Int) {
-        val item = data[position]
-        holder.title.text = item.title
-        when (item.difficulty){
-            1 -> holder.title.setTextColor(Color.parseColor(VERY_EASY_COLOR))
-            else -> holder.title.setTextColor(Color.WHITE)
-        }
-        holder.descShort.text = item.description_short
-        holder.points.text = fromDifficultyToPointsString(item.difficulty)
+        holder.bind(clickListener, getItem(position)!!)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate((R.layout.quest_item), parent, false)
-        return QuestViewHolder(view)
+        val binding = QuestItemBinding.inflate(layoutInflater, parent, false)
+        return QuestViewHolder(binding)
+    }
+
+class QuestViewHolder(val binding: QuestItemBinding) : RecyclerView.ViewHolder(binding.root){
+    fun bind(clickListener: QuestListener, item : Quest){
+        binding.questTitle.text = item.title
+        binding.quest = item
+        binding.clickListener = clickListener
+        binding.executePendingBindings()
+        when (item.difficulty){
+            1 -> {
+                binding.questTitle.setTextColor(Color.parseColor(VERY_EASY_COLOR))
+            }
+            2 -> {
+                binding.questTitle.setTextColor(Color.parseColor(EASY_COLOR))
+            }
+            3 -> {
+                binding.questTitle.setTextColor(Color.parseColor(MEDIUM_COLOR))
+            }
+            4 -> {
+                binding.questTitle.setTextColor(Color.parseColor(HARD_COLOR))
+            }
+            5 -> {
+                binding.questTitle.setTextColor(Color.parseColor(VERY_HARD_COLOR))
+            }
+            else -> binding.questTitle.setTextColor(Color.WHITE)
+        }
+        when(item.topic){
+            DIET -> binding.imgTopic.setImageResource(R.drawable.ic_diet)
+            KNOWLEDGE -> binding.imgTopic.setImageResource(R.drawable.ic_knowledge)
+            FITNESS -> binding.imgTopic.setImageResource(R.drawable.ic_fitness)
+            WORK -> binding.imgTopic.setImageResource(R.drawable.ic_work)
+            HEALTH -> binding.imgTopic.setImageResource(R.drawable.ic_health)
+            else -> binding.imgTopic.setImageResource(R.drawable.ic_tidiness)
+        }
+
+        binding.questDescShort.text = item.description_short
+        binding.questPts.text = fromDifficultyToPointsString(item.difficulty)
     }
 
     private fun fromDifficultyToPointsString(difficulty : Int?) : String{
@@ -42,11 +66,20 @@ class QuestAdapter : RecyclerView.Adapter<QuestViewHolder>() {
             var points : Int = difficulty.times(10)
             points.toString()
         } else "Error"
-        }
+    }
+}
+}
+
+class QuestDiffCallBack : DiffUtil.ItemCallback<Quest>(){
+    override fun areItemsTheSame(oldItem: Quest, newItem: Quest): Boolean {
+        return oldItem.id == newItem.id
     }
 
-class QuestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-    val title : TextView = itemView.findViewById(R.id.quest_title)
-    val descShort : TextView = itemView.findViewById(R.id.quest_desc_short)
-    val points : TextView = itemView.findViewById((R.id.quest_pts))
+    override fun areContentsTheSame(oldItem: Quest, newItem: Quest): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class QuestListener(val clickListener: (id : Int) -> Unit){
+    fun onClick(quest: Quest) = clickListener(quest.id)
 }

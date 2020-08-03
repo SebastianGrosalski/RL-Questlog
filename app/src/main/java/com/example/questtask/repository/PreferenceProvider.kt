@@ -2,12 +2,14 @@ package com.example.questtask.repository
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import com.example.questtask.util.*
 
 private const val NAME = "name"
 private const val CONTAINS_PREFERENCES = "containsPreferences"
 
 class PreferenceProvider(context: Context) {
+
     private val applicationContext: Context = context.applicationContext
     private val sharedPreferences : SharedPreferences = applicationContext.getSharedPreferences(
         "preferences",
@@ -32,6 +34,29 @@ class PreferenceProvider(context: Context) {
             CONTAINS_PREFERENCES,
             true
         ).apply()
+    }
+
+    fun getTopicsList() : MutableList<String> {
+        val topicsList: MutableList<String> = mutableListOf()
+        if (getTidiness()!!) {
+            topicsList.add(TIDINESS)
+        }
+        if(getDiet()!!){
+            topicsList.add(DIET)
+        }
+        if(getKnowledge()!!){
+            topicsList.add(KNOWLEDGE)
+        }
+        if(getFitness()!!){
+            topicsList.add(FITNESS)
+        }
+        if(getHealth()!!){
+            topicsList.add(HEALTH)
+        }
+        if(getWork()!!){
+            topicsList.add(WORK)
+        }
+        return topicsList
     }
 
     fun getContainsFlag() : Boolean{

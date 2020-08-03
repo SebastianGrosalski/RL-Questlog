@@ -24,7 +24,7 @@ abstract val questDatabaseDao : QuestDao
                         context.applicationContext,
                         QuestDatabase::class.java,
                         "quest_database"
-                    ).createFromAsset("funktionier.db")
+                    ).createFromAsset("initialQuests.db")
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance

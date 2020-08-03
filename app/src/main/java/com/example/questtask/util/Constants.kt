@@ -10,3 +10,7 @@ const val FITNESS = "fitness"
 const val DIET = "diet"
 
 const val VERY_EASY_COLOR = "#4CAF50"
+const val EASY_COLOR = "#8BC34A"
+const val MEDIUM_COLOR = "#FFEB3B"
+const val HARD_COLOR = "#FFC107"
+const val VERY_HARD_COLOR = "#FF5722"

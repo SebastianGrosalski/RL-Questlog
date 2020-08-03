@@ -3,16 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/questFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/questFragment"
         android:name="com.example.questtask.ui.quest.QuestFragment"
         android:label="@string/title_quests"
         tools:layout="@layout/fragment_quests">
         <action
             android:id="@+id/action_navigation_home_to_helloFragment"
             app:destination="@id/helloFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_addQuest"
+            app:destination="@id/addQuestFragment" />
+        <action
+            android:id="@+id/action_questFragment_to_questDetailFragment"
+            app:destination="@id/questDetailFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_close_exit" />
     </fragment>
 
     <fragment
@@ -44,7 +52,7 @@
         tools:layout="@layout/fragment_initial_preferences" >
         <action
             android:id="@+id/action_initialPreferences_to_navigation_home"
-            app:destination="@id/navigation_home"
+            app:destination="@id/questFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
     </fragment>
@@ -52,4 +60,18 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.questtask.ui.settings.SettingsFragment"
         android:label="@string/overflow_pref" /><action android:id="@+id/action_global_settingsFragment" app:destination="@id/settingsFragment"/>
+    <fragment
+        android:id="@+id/addQuestFragment"
+        android:name="com.example.questtask.ui.questadd.AddQuestFragment"
+        android:label="add_quest_fragment"
+        tools:layout="@layout/fragment_add_quest" />
+    <fragment
+        android:id="@+id/questDetailFragment"
+        android:name="com.example.questtask.ui.questdetail.QuestDetailFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_quest_detail">
+        <argument
+            android:name="questId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

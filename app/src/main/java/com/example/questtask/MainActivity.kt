@@ -1,11 +1,9 @@
 package com.example.questtask
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -31,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
+                R.id.questFragment, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         // Set up different fragments as entry point for the app
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         if(!prefProvider.getContainsFlag()){
             graph.startDestination = R.id.helloFragment
         } else {
-            graph.startDestination = R.id.navigation_home
+            graph.startDestination = R.id.questFragment
         }
         navController.graph = graph
     }

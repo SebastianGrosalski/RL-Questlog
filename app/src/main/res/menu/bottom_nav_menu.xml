@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/questFragment"
         android:icon="@drawable/ic_view_agenda_24px"
         android:title="@string/title_quests" />
 
