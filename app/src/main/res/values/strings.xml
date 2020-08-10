@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">QuestTask</string>
     <string name="title_quests">Aufgaben</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_doneQuests">Erledigt</string>
     <string name="title_notifications">Notifications</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_hello">Hallo!\nBitte verrate mir deinen Namen!</string>
@@ -23,4 +23,10 @@
     <string name="defaultZero">0</string>
     <string name="tv_lvl">"LVL: "</string>
     <string name="tv_questTitle">"Titel: "</string>
+    <string name="te_title">Titel der Aufgabe</string>
+    <string name="tv_topic">Kategorie</string>
+    <string name="tv_difficulty">Schwierigkeit</string>
+    <string name="te_short_description">Trage eine kurze Beschreibung der Aufgabe ein!</string>
+    <string name="tv_points">Punkte:</string>
+    <string name="te_longdescription_hint">Trage hier eine etwas längere Beschreibung der Aufgabe ein!\nDazu gehören könnte z.B. warum diese Aufgabe sinnvoll ist und was dich motiviert, sie anzugehen!</string>
 </resources>

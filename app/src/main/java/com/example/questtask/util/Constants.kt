@@ -9,6 +9,12 @@ const val HEALTH = "health"
 const val FITNESS = "fitness"
 const val DIET = "diet"
 
+const val VERY_EASY = 1
+const val EASY = 2
+const val MODERATE = 3
+const val HARD = 4
+const val VERY_HARD = 5
+
 const val VERY_EASY_COLOR = "#4CAF50"
 const val EASY_COLOR = "#8BC34A"
 const val MEDIUM_COLOR = "#FFEB3B"

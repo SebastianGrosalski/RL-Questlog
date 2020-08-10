@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.example.questtask.util.*
 
 private const val NAME = "name"
+private const val POINTS = "points"
 private const val CONTAINS_PREFERENCES = "containsPreferences"
 
 class PreferenceProvider(context: Context) {
@@ -19,6 +20,19 @@ class PreferenceProvider(context: Context) {
         sharedPreferences.edit().putString(
             NAME,
             string
+        ).apply()
+    }
+
+    fun getPoints() : Int{
+        return sharedPreferences.getInt(POINTS, 0)
+    }
+
+    fun putPoints(points: Int){
+        val oldPoints : Int = sharedPreferences.getInt(POINTS, 0)
+        val newPoints = oldPoints + points
+        sharedPreferences.edit().putInt(
+            POINTS,
+            newPoints
         ).apply()
     }
 

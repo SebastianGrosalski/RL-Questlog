@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="topics_array">
+        <item>Ordnung</item>
+        <item>Arbeit</item>
+        <item>Gesundheit</item>
+        <item>Fitness</item>
+        <item>Ernährung</item>
+        <item>Wissen</item>
+    </string-array>
+
+    <string-array name="difficulty_array">
+        <item>Sehr Leicht</item>
+        <item>Leicht</item>
+        <item>Mittel</item>
+        <item>Schwierig</item>
+        <item>Sehr schwierig</item>
+    </string-array>
+</resources>

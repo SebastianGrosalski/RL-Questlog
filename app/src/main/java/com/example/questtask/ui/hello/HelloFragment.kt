@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -49,6 +50,8 @@ class HelloFragment : Fragment() {
         )
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        binding.etName.imeOptions = EditorInfo.IME_ACTION_DONE
 
         viewModel.navigateToInitialPreferences.observe(viewLifecycleOwner, Observer {
             if (containsName()) {

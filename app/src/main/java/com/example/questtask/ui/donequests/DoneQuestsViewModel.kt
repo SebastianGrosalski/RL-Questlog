@@ -1,40 +1,35 @@
-package com.example.questtask.ui.quest
+package com.example.questtask.ui.donequests
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.questtask.repository.PreferenceProvider
 import com.example.questtask.repository.QuestRepository
 import com.example.questtask.repository.room.Quest
-import com.example.questtask.repository.room.QuestDao
 import com.example.questtask.repository.room.QuestDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class QuestViewModel(application : Application) : AndroidViewModel(application) {
+class DoneQuestsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository : QuestRepository
     init{
         val questDao = QuestDatabase.getInstance(application).questDatabaseDao
         repository = QuestRepository(questDao)
     }
 
-    private val _navigate = MutableLiveData<Boolean>()
-    val navigate : LiveData<Boolean>
-        get() = _navigate
-
     private val _navigateToDetail = MutableLiveData<Int>()
     val navigateToDetail
-    get() = _navigateToDetail
+        get() = _navigateToDetail
 
     val prefProvider = PreferenceProvider(application.applicationContext)
 
     private val _quests = MutableLiveData<List<Quest>>()
     val quests : LiveData<List<Quest>>
-    get() = _quests
+        get() = _quests
 
     private var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -43,15 +38,7 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
     var questList =  prefProvider.getTopicsList()
 
     init{
-       uiScope.launch { setQuests() }
-    }
-
-    fun navigate(){
-        _navigate.value = true
-    }
-
-    fun doneNavigating(){
-        _navigate.value = false
+        uiScope.launch { setQuests() }
     }
 
     fun onQuestClicked(id : Int){
@@ -66,7 +53,7 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
         questList = prefProvider.getTopicsList()
         uiScope.launch {
             ioScope.launch {
-                _quests.postValue(repository.questByTopics(questList))
+                _quests.postValue(repository.questByTopicsDone(questList))
             }
         }
     }
@@ -75,4 +62,5 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
         super.onCleared()
         viewModelJob.cancel()
     }
+
 }

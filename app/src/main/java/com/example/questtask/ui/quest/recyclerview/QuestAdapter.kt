@@ -4,11 +4,12 @@ import com.example.questtask.util.*
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questtask.R
+import com.example.questtask.R.drawable.customborder_accepted
+import com.example.questtask.R.drawable.customborder_done
 import com.example.questtask.databinding.QuestItemBinding
 import com.example.questtask.repository.room.Quest
 
@@ -55,6 +56,17 @@ class QuestViewHolder(val binding: QuestItemBinding) : RecyclerView.ViewHolder(b
             WORK -> binding.imgTopic.setImageResource(R.drawable.ic_work)
             HEALTH -> binding.imgTopic.setImageResource(R.drawable.ic_health)
             else -> binding.imgTopic.setImageResource(R.drawable.ic_tidiness)
+        }
+        when {
+            item.accepted == true && item.done != true -> {
+                binding.layout.setBackgroundResource(customborder_accepted)
+            }
+            item.done == true && item.accepted == true -> {
+                binding.layout.setBackgroundResource(customborder_done)
+            }
+            else -> {
+                binding.layout.setBackgroundColor(Color.parseColor("#232323"))
+            }
         }
 
         binding.questDescShort.text = item.description_short

@@ -7,9 +7,9 @@
         android:title="@string/title_quests" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/doneQuestsFragment"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/title_doneQuests" />
 
     <item
         android:id="@+id/navigation_notifications"
