@@ -14,6 +14,7 @@ import com.example.questtask.R
 import com.example.questtask.databinding.FragmentDoneQuestsBinding
 import com.example.questtask.ui.quest.recyclerview.QuestAdapter
 import com.example.questtask.ui.quest.recyclerview.QuestListener
+import com.example.questtask.util.LEVELBARRIER
 import kotlinx.coroutines.launch
 
 class DoneQuestsFragment : Fragment() {
@@ -36,6 +37,9 @@ class DoneQuestsFragment : Fragment() {
             false
         )
 
+        binding.progressXp.max = LEVELBARRIER
+        binding.progressXp.progress = viewModel.prefProvider.getPoints()
+        binding.tvLvlPoints.text = viewModel.prefProvider.getLevel().toString()
         binding.tvName.text = viewModel.prefProvider.getName()
         binding.tvPoints.text = viewModel.prefProvider.getPoints().toString()
         binding.viewmodel = viewModel

@@ -18,6 +18,7 @@ import com.example.questtask.databinding.FragmentQuestsBinding
 import com.example.questtask.repository.room.QuestDatabase
 import com.example.questtask.ui.quest.recyclerview.QuestAdapter
 import com.example.questtask.ui.quest.recyclerview.QuestListener
+import com.example.questtask.util.LEVELBARRIER
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
@@ -44,6 +45,9 @@ class QuestFragment : Fragment() {
             false
         )
 
+        binding.progressXp.max = LEVELBARRIER
+        binding.progressXp.progress = viewModel.prefProvider.getPoints()
+        binding.tvLvlPoints.text = viewModel.prefProvider.getLevel().toString()
         binding.tvName.text = viewModel.prefProvider.getName()
         binding.tvPoints.text = viewModel.prefProvider.getPoints().toString()
         binding.viewmodel = viewModel

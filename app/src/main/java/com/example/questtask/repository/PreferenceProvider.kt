@@ -8,6 +8,8 @@ import com.example.questtask.util.*
 private const val NAME = "name"
 private const val POINTS = "points"
 private const val CONTAINS_PREFERENCES = "containsPreferences"
+private const val LEVEL = "level"
+
 
 class PreferenceProvider(context: Context) {
 
@@ -29,11 +31,24 @@ class PreferenceProvider(context: Context) {
 
     fun putPoints(points: Int){
         val oldPoints : Int = sharedPreferences.getInt(POINTS, 0)
-        val newPoints = oldPoints + points
+        var newPoints = oldPoints + points
+        if(newPoints >= LEVELBARRIER){
+            newPoints %= LEVELBARRIER
+            putLevel()
+        }
         sharedPreferences.edit().putInt(
             POINTS,
             newPoints
         ).apply()
+    }
+
+    fun putLevel(){
+        val oldLevel = sharedPreferences.getInt(LEVEL, 0)
+        sharedPreferences.edit().putInt(LEVEL, oldLevel+1).apply()
+    }
+
+    fun getLevel() : Int{
+        return sharedPreferences.getInt(LEVEL, 0)
     }
 
     fun putPreferredTopics(topicMap : HashMap<String, Boolean>){
