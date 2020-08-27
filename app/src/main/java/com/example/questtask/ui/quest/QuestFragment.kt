@@ -18,7 +18,8 @@ import com.example.questtask.databinding.FragmentQuestsBinding
 import com.example.questtask.repository.room.QuestDatabase
 import com.example.questtask.ui.quest.recyclerview.QuestAdapter
 import com.example.questtask.ui.quest.recyclerview.QuestListener
-import com.example.questtask.util.LEVELBARRIER
+import com.example.questtask.util.LEVEL
+import com.example.questtask.util.POINTS
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
@@ -45,15 +46,19 @@ class QuestFragment : Fragment() {
             false
         )
 
-        binding.progressXp.max = LEVELBARRIER
-        binding.progressXp.progress = viewModel.prefProvider.getPoints()
-        binding.tvLvlPoints.text = viewModel.prefProvider.getLevel().toString()
+        binding.progressXp.max = viewModel.prefProvider.calculateLevelBarrier(LEVEL)
+        binding.progressXp.progress = viewModel.prefProvider.getPoints(POINTS)
+        binding.tvPoints.text = viewModel.levelRatioStringOf(POINTS, LEVEL)
+        binding.tvLvlPoints.text = viewModel.prefProvider.getLevel(LEVEL).toString()
         binding.tvName.text = viewModel.prefProvider.getName()
-        binding.tvPoints.text = viewModel.prefProvider.getPoints().toString()
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         val adapter = QuestAdapter(QuestListener{ questId -> viewModel.onQuestClicked(questId)})
         binding.questView.adapter = adapter
+
+        viewModel.xp.observe(viewLifecycleOwner, Observer{
+            binding.tvPoints.text = it
+        })
 
         viewModel.quests.observe(viewLifecycleOwner, Observer{
             viewModel.uiScope.launch { viewModel.setQuests() }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.preference.Preference
 import com.example.questtask.R
 import com.example.questtask.repository.PreferenceProvider
+import com.example.questtask.util.*
 
 class InitialPreferencesViewModel(application: Application) : AndroidViewModel(application) {
     private val _navigate = MutableLiveData<Boolean>()
@@ -29,10 +30,13 @@ class InitialPreferencesViewModel(application: Application) : AndroidViewModel(a
         _navigate.value = null
     }
 
+
     //Puts the selected Topics into Shared preferences
     //and sets the flag to determine whether preferences contain values
     fun putTopics(map : HashMap<String, Boolean>){
         prefProvider.putPreferredTopics(map)
         prefProvider.putContainsFlag()
+        if(!prefProvider.getContainsFlag())
+            prefProvider.levelAll()
     }
 }

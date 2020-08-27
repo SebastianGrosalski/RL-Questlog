@@ -108,7 +108,7 @@ class QuestDetailFragment : Fragment() {
             viewModel.uiScope.launch {
                 viewModel.ioScope.launch {
                     Log.i("QUESTDETAILFRAGMENT", "QUEST ABGEGEBEN: ${quest.difficulty?.times(10)!!}")
-                    viewModel.questDone(quest.id, quest.difficulty?.times(10)!!)
+                    viewModel.questDone(quest.id, quest.topic!!, quest.difficulty.times(10)!!)
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())

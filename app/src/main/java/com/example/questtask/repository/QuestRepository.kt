@@ -25,18 +25,6 @@ class QuestRepository(private val dao: QuestDao) {
             return dao.questById(id)
         }
 
-        suspend fun getAllQuests() : LiveData<List<Quest>>{
-            return dao.getAllQuests()
-        }
-
-        suspend fun getUnaccepted() : LiveData<List<Quest>>{
-            return dao.getUnaccepted()
-        }
-
-        suspend fun getAccepted() : LiveData<List<Quest>>{
-            return dao.getAccepted()
-        }
-
         suspend fun setAccepted(id: Int){
             dao.setAccepted(id)
         }

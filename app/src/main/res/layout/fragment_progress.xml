@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.questtask.ui.progress.ProgressViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.progress.ProgressFragment">
+
+        <TextView
+            android:id="@+id/tv_lvlText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="LEVEL "
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toStartOf="@+id/progressBarMain"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            app:layout_constraintEnd_toEndOf="@+id/progressBarMain"
+            app:layout_constraintTop_toTopOf="@+id/tv_lvlText" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ProgressBar
+            android:id="@+id/progressBarMain"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="4"
+            android:scaleY="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lvlText" />
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBarMain"></View>
+
+        <TextView
+            android:id="@+id/tv_tidiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/tidiness"
+            app:layout_constraintEnd_toEndOf="@+id/line4"
+            app:layout_constraintStart_toStartOf="@+id/line4"
+            app:layout_constraintTop_toBottomOf="@+id/line4" />
+
+        <TextView
+            android:id="@+id/tv_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/work"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb_tidiness" />
+
+        <TextView
+            android:id="@+id/tv_health"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/health"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb_work" />
+
+        <TextView
+            android:id="@+id/tv_fitness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/fitness"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb_health" />
+
+        <TextView
+            android:id="@+id/tv_diet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/diet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb_fitness" />
+
+        <TextView
+            android:id="@+id/tv_knowledge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/knowledge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb_diet" />
+
+        <ProgressBar
+            android:id="@+id/pb_tidiness"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="4"
+            android:scaleY="3"
+            app:layout_constraintEnd_toEndOf="@+id/tv_tidiness"
+            app:layout_constraintStart_toStartOf="@+id/tv_tidiness"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tidiness" />
+
+        <ProgressBar
+            android:id="@+id/pb_work"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="4"
+            android:scaleY="3"
+            app:layout_constraintEnd_toEndOf="@+id/tv_work"
+            app:layout_constraintStart_toStartOf="@+id/tv_work"
+            app:layout_constraintTop_toBottomOf="@+id/tv_work" />
+
+        <ProgressBar
+            android:id="@+id/pb_health"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="4"
+            android:scaleY="3"
+            app:layout_constraintEnd_toEndOf="@+id/tv_health"
+            app:layout_constraintStart_toStartOf="@+id/tv_health"
+            app:layout_constraintTop_toBottomOf="@+id/tv_health" />
+
+        <ProgressBar
+            android:id="@+id/pb_fitness"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="4"
+            android:scaleY="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fitness" />
+
+        <ProgressBar
+            android:id="@+id/pb_diet"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="4"
+            android:scaleY="3"
+            app:layout_constraintEnd_toEndOf="@+id/tv_diet"
+            app:layout_constraintStart_toStartOf="@+id/tv_diet"
+            app:layout_constraintTop_toBottomOf="@+id/tv_diet" />
+
+        <ProgressBar
+            android:id="@+id/pb_knowledge"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="4"
+            android:scaleY="3"
+            app:layout_constraintEnd_toEndOf="@+id/tv_knowledge"
+            app:layout_constraintStart_toStartOf="@+id/tv_knowledge"
+            app:layout_constraintTop_toBottomOf="@+id/tv_knowledge" />
+
+        <TextView
+            android:id="@+id/tv_pb_tidiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="0/100"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_tidiness"
+            app:layout_constraintEnd_toEndOf="@id/pb_tidiness"
+            app:layout_constraintStart_toStartOf="@id/pb_tidiness"
+            app:layout_constraintTop_toTopOf="@+id/pb_tidiness" />
+
+        <TextView
+            android:id="@+id/tv_pb_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="0/100"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBarMain"
+            app:layout_constraintEnd_toEndOf="@id/progressBarMain"
+            app:layout_constraintStart_toStartOf="@id/progressBarMain"
+            app:layout_constraintTop_toTopOf="@+id/progressBarMain" />
+
+        <TextView
+            android:id="@+id/tv_pb_health"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="0/100"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_health"
+            app:layout_constraintEnd_toEndOf="@id/pb_health"
+            app:layout_constraintStart_toStartOf="@id/pb_health"
+            app:layout_constraintTop_toTopOf="@+id/pb_health" />
+
+        <TextView
+            android:id="@+id/tv_pb_fitness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="0/100"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_fitness"
+            app:layout_constraintEnd_toEndOf="@id/pb_fitness"
+            app:layout_constraintStart_toStartOf="@id/pb_fitness"
+            app:layout_constraintTop_toTopOf="@+id/pb_fitness" />
+
+        <TextView
+            android:id="@+id/tv_pb_diet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="0/100"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_diet"
+            app:layout_constraintEnd_toEndOf="@id/pb_diet"
+            app:layout_constraintStart_toStartOf="@id/pb_diet"
+            app:layout_constraintTop_toTopOf="@+id/pb_diet" />
+
+        <TextView
+            android:id="@+id/tv_pb_knowledge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="0/100"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_knowledge"
+            app:layout_constraintEnd_toEndOf="@id/pb_knowledge"
+            app:layout_constraintStart_toStartOf="@id/pb_knowledge"
+            app:layout_constraintTop_toTopOf="@+id/pb_knowledge" />
+
+        <TextView
+            android:id="@+id/tv_pb_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="0/100"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_work"
+            app:layout_constraintEnd_toEndOf="@id/pb_work"
+            app:layout_constraintStart_toStartOf="@id/pb_work"
+            app:layout_constraintTop_toTopOf="@+id/pb_work" />
+
+        <TextView
+            android:id="@+id/tv_tidiness_lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tidiness"
+            app:layout_constraintStart_toEndOf="@+id/tv_tidiness"
+            app:layout_constraintTop_toTopOf="@+id/tv_tidiness" />
+
+        <TextView
+            android:id="@+id/tv_work_lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_work"
+            app:layout_constraintStart_toEndOf="@+id/tv_work"
+            app:layout_constraintTop_toTopOf="@+id/tv_work" />
+
+        <TextView
+            android:id="@+id/tv_health_lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_health"
+            app:layout_constraintStart_toEndOf="@+id/tv_health"
+            app:layout_constraintTop_toTopOf="@+id/tv_health" />
+
+        <TextView
+            android:id="@+id/tv_fitness_lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_fitness"
+            app:layout_constraintStart_toEndOf="@+id/tv_fitness"
+            app:layout_constraintTop_toTopOf="@+id/tv_fitness" />
+
+        <TextView
+            android:id="@+id/tv_diet_lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_diet"
+            app:layout_constraintStart_toEndOf="@+id/tv_diet"
+            app:layout_constraintTop_toTopOf="@+id/tv_diet" />
+
+        <TextView
+            android:id="@+id/tv_knowledge_lvl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_knowledge"
+            app:layout_constraintStart_toEndOf="@+id/tv_knowledge"
+            app:layout_constraintTop_toTopOf="@+id/tv_knowledge" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_lvl"
+            app:layout_constraintStart_toStartOf="@+id/tv_lvlText"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

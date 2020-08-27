@@ -21,6 +21,10 @@ class DoneQuestsViewModel(application: Application) : AndroidViewModel(applicati
         repository = QuestRepository(questDao)
     }
 
+    private val _xp = MutableLiveData<String>()
+    val xp : LiveData<String>
+    get() = _xp
+
     private val _navigateToDetail = MutableLiveData<Int>()
     val navigateToDetail
         get() = _navigateToDetail
@@ -56,6 +60,12 @@ class DoneQuestsViewModel(application: Application) : AndroidViewModel(applicati
                 _quests.postValue(repository.questByTopicsDone(questList))
             }
         }
+    }
+
+    fun levelRatioStringOf(pointsKey : String, levelKey : String) : String{
+        _xp.value = "${prefProvider.getPoints(pointsKey)}/" +
+                "${prefProvider.calculateLevelBarrier(levelKey)}"
+        return _xp.value!!
     }
 
     override fun onCleared() {

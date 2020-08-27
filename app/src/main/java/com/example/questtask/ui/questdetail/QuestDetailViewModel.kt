@@ -7,6 +7,7 @@ import com.example.questtask.repository.QuestRepository
 import com.example.questtask.repository.room.Quest
 import com.example.questtask.repository.room.QuestDatabase
 import kotlinx.coroutines.*
+import com.example.questtask.util.*
 
 class QuestDetailViewModel(application: Application, idParam : Int) : AndroidViewModel(application)
 {
@@ -34,8 +35,16 @@ class QuestDetailViewModel(application: Application, idParam : Int) : AndroidVie
         repository.setAccepted(id)
     }
 
-    suspend fun questDone(id: Int, pts: Int){
-        prefProvider.putPoints(pts)
+    suspend fun questDone(id: Int, topic : String, pts: Int){
+        prefProvider.putPoints(LEVEL, POINTS, pts)
+        when(topic){
+            KNOWLEDGE -> prefProvider.putPoints(KNOWLEDGE_LVL, KNOWLEDGE_POINTS, pts)
+            DIET -> prefProvider.putPoints(DIET_LVL, DIET_POINTS, pts)
+            TIDINESS -> prefProvider.putPoints(TIDINESS_LVL, TIDINESS_POINTS, pts)
+            FITNESS -> prefProvider.putPoints(FITNESS_LVL, FITNESS_POINTS, pts)
+            WORK -> prefProvider.putPoints(WORK_LVL, WORK_POINTS, pts)
+            else -> prefProvider.putPoints(HEALTH_LVL, HEALTH_POINTS, pts)
+        }
         repository.setDone(id)
     }
 

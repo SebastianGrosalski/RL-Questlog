@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.questFragment, R.id.doneQuestsFragment, R.id.navigation_notifications))
+                R.id.questFragment, R.id.doneQuestsFragment, R.id.progressFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         // Set up different fragments as entry point for the app

@@ -26,6 +26,10 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
     val navigate : LiveData<Boolean>
         get() = _navigate
 
+    private val _xp = MutableLiveData<String>()
+    val xp : LiveData<String>
+    get() = _xp
+
     private val _navigateToDetail = MutableLiveData<Int>()
     val navigateToDetail
     get() = _navigateToDetail
@@ -60,6 +64,12 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
 
     fun onQuestClickedDone(){
         _navigateToDetail.value = null
+    }
+
+    fun levelRatioStringOf(pointsKey : String, levelKey : String) : String{
+              _xp.value = "${prefProvider.getPoints(pointsKey)}/" +
+                "${prefProvider.calculateLevelBarrier(levelKey)}"
+              return _xp.value!!
     }
 
     fun setQuests(){

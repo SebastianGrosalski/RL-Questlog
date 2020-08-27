@@ -34,10 +34,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.questtask.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/progressFragment"
+        android:name="com.example.questtask.ui.progress.ProgressFragment"
+        android:label="@string/f_progress"
+        tools:layout="@layout/fragment_progress" />
     <fragment
         android:id="@+id/helloFragment"
         android:name="com.example.questtask.ui.hello.HelloFragment"
