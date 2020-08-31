@@ -7,8 +7,13 @@ import androidx.lifecycle.LiveData
 import com.example.questtask.util.*
 
 private const val NAME = "name"
+//Flag to determine if hellofragment and initialpreferences-fragments are shown
 private const val CONTAINS_PREFERENCES = "containsPreferences"
 
+/* ####################################################
+    PreferenceProvider is used for unified usage of shared
+    preferences along all viewmodels and fragments
+   #################################################### */
 class PreferenceProvider(context: Context) {
 
     private val applicationContext: Context = context.applicationContext

@@ -42,6 +42,7 @@ class AddQuestFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(AddQuestViewModel::class.java)
 
+        //Spinner for topic
         ArrayAdapter.createFromResource(
             this?.requireContext(),
             R.array.topics_array,
@@ -51,6 +52,7 @@ class AddQuestFragment : Fragment() {
             binding.spinnerTopic.adapter = arrayAdapter
         }
 
+        //Spinner for difficulty
         ArrayAdapter.createFromResource(
             this?.requireContext(),
             R.array.difficulty_array,
@@ -156,6 +158,7 @@ class AddQuestFragment : Fragment() {
                 ).show()
             }
 
+            //Write contents to db && navigate if required fields are filled
             if (containsLongDescription()) {
                 viewModel.questLongDesc = binding.teLongDesc.text.toString()
             } else {

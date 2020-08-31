@@ -47,6 +47,7 @@ class ProgressFragment : Fragment() {
             }
         }
 
+        //###### Setup for all progressbars ######//
         binding.tvName.text = progressViewModel.prefProvider.getName()
         //Mainlevel
         binding.tvLvl.text = progressViewModel.prefProvider.getLevel(LEVEL).toString()

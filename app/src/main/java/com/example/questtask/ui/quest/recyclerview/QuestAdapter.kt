@@ -31,6 +31,8 @@ class QuestViewHolder(val binding: QuestItemBinding) : RecyclerView.ViewHolder(b
         binding.quest = item
         binding.clickListener = clickListener
         binding.executePendingBindings()
+
+        //Textcolor depending on difficulty
         when (item.difficulty){
             1 -> {
                 binding.questTitle.setTextColor(Color.parseColor(VERY_EASY_COLOR))
@@ -49,6 +51,8 @@ class QuestViewHolder(val binding: QuestItemBinding) : RecyclerView.ViewHolder(b
             }
             else -> binding.questTitle.setTextColor(Color.WHITE)
         }
+
+        //Set icon depending on topic
         when(item.topic){
             DIET -> binding.imgTopic.setImageResource(R.drawable.ic_diet)
             KNOWLEDGE -> binding.imgTopic.setImageResource(R.drawable.ic_knowledge)
@@ -57,6 +61,8 @@ class QuestViewHolder(val binding: QuestItemBinding) : RecyclerView.ViewHolder(b
             HEALTH -> binding.imgTopic.setImageResource(R.drawable.ic_health)
             else -> binding.imgTopic.setImageResource(R.drawable.ic_tidiness)
         }
+
+        //Border depending on status of quest
         when {
             item.accepted == true && item.done != true -> {
                 binding.layout.setBackgroundResource(customborder_accepted)

@@ -37,14 +37,18 @@ class DoneQuestsFragment : Fragment() {
             container,
             false
         )
-
+        //Set values for the progressbar under the appbar
         binding.progressXp.max = viewModel.prefProvider.calculateLevelBarrier(LEVEL)
         binding.progressXp.progress = viewModel.prefProvider.getPoints(POINTS)
         binding.tvLvlPoints.text = viewModel.prefProvider.getLevel(LEVEL).toString()
         binding.tvName.text = viewModel.prefProvider.getName()
         binding.tvPoints.text = viewModel.levelRatioStringOf(POINTS, LEVEL)
+
+        //Viewmodel
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
+
+        //Recyclerview
         val adapter = QuestAdapter(QuestListener{ questId -> viewModel.onQuestClicked(questId)})
         binding.questView.adapter = adapter
 
@@ -59,6 +63,7 @@ class DoneQuestsFragment : Fragment() {
             }
         })
 
+        //Navigation back to Detail
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer { quest ->
             quest?.let {
                 this.findNavController().navigate(DoneQuestsFragmentDirections.actionDoneQuestsFragmentToQuestDetailFragment(quest))

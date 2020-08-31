@@ -46,11 +46,14 @@ class QuestFragment : Fragment() {
             false
         )
 
+        //Setup of status bar beneath app-bar
         binding.progressXp.max = viewModel.prefProvider.calculateLevelBarrier(LEVEL)
         binding.progressXp.progress = viewModel.prefProvider.getPoints(POINTS)
         binding.tvPoints.text = viewModel.levelRatioStringOf(POINTS, LEVEL)
         binding.tvLvlPoints.text = viewModel.prefProvider.getLevel(LEVEL).toString()
         binding.tvName.text = viewModel.prefProvider.getName()
+
+
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         val adapter = QuestAdapter(QuestListener{ questId -> viewModel.onQuestClicked(questId)})

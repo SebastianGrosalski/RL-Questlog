@@ -62,6 +62,7 @@ class DoneQuestsViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
+    //Format String to "XP/XP Needed" eg. "20/100"
     fun levelRatioStringOf(pointsKey : String, levelKey : String) : String{
         _xp.value = "${prefProvider.getPoints(pointsKey)}/" +
                 "${prefProvider.calculateLevelBarrier(levelKey)}"

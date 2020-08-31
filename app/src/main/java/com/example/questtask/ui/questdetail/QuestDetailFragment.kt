@@ -76,6 +76,7 @@ class QuestDetailFragment : Fragment() {
             return quest.difficulty!!.times(10)
         }
 
+        //Visibility Settings for Detailbutton//
         binding.tvPoints.text = getPointAmount(quest).toString()
         if(quest.accepted == false){
             binding.btnAccept.visibility = View.VISIBLE
