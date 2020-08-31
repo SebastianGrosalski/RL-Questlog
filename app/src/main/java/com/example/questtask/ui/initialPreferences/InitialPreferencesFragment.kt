@@ -96,5 +96,5 @@ class InitialPreferencesFragment : Fragment() {
             && !binding.cbHealth.isChecked
             && !binding.cbKnowledge.isChecked
             && !binding.cbFitness.isChecked
-            && !binding.cbDiet.isChecked)
+            && !binding.cbTidiness.isChecked)
 }

@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="LEVEL "
+            android:text="@string/lvl_caps"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="@+id/progressBarMain"
@@ -29,8 +29,9 @@
             android:id="@+id/tv_lvl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
+            android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="@+id/progressBarMain"
+            app:layout_constraintStart_toEndOf="@+id/tv_lvlText"
             app:layout_constraintTop_toTopOf="@+id/tv_lvlText" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -69,7 +70,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/tidiness"
             app:layout_constraintEnd_toEndOf="@+id/line4"
-            app:layout_constraintStart_toStartOf="@+id/line4"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line4" />
 
         <TextView
@@ -199,7 +200,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="0/100"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pb_tidiness"
@@ -212,7 +212,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="0/100"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/progressBarMain"
@@ -225,7 +224,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="0/100"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pb_health"
@@ -238,7 +236,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="0/100"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pb_fitness"
@@ -251,7 +248,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="0/100"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pb_diet"
@@ -264,7 +260,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="0/100"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pb_knowledge"
@@ -277,7 +272,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="0/100"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/pb_work"
@@ -290,7 +284,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/tv_tidiness"
             app:layout_constraintStart_toEndOf="@+id/tv_tidiness"
             app:layout_constraintTop_toTopOf="@+id/tv_tidiness" />
@@ -300,7 +293,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/tv_work"
             app:layout_constraintStart_toEndOf="@+id/tv_work"
             app:layout_constraintTop_toTopOf="@+id/tv_work" />
@@ -310,7 +302,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/tv_health"
             app:layout_constraintStart_toEndOf="@+id/tv_health"
             app:layout_constraintTop_toTopOf="@+id/tv_health" />
@@ -320,7 +311,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/tv_fitness"
             app:layout_constraintStart_toEndOf="@+id/tv_fitness"
             app:layout_constraintTop_toTopOf="@+id/tv_fitness" />
@@ -330,7 +320,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/tv_diet"
             app:layout_constraintStart_toEndOf="@+id/tv_diet"
             app:layout_constraintTop_toTopOf="@+id/tv_diet" />
@@ -340,7 +329,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/tv_knowledge"
             app:layout_constraintStart_toEndOf="@+id/tv_knowledge"
             app:layout_constraintTop_toTopOf="@+id/tv_knowledge" />
@@ -350,8 +338,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TextView"
-            android:textSize="18dp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_lvl"
             app:layout_constraintStart_toStartOf="@+id/tv_lvlText"
             app:layout_constraintTop_toTopOf="parent" />

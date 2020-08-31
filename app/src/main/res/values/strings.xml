@@ -30,4 +30,6 @@
     <string name="tv_points">Punkte:</string>
     <string name="te_longdescription_hint">Trage hier eine etwas längere Beschreibung der Aufgabe ein!\nDazu gehören könnte z.B. warum diese Aufgabe sinnvoll ist und was dich motiviert, sie anzugehen!</string>
     <string name="f_progress">Fortschritt</string>
+    <string name="no_quests_available">Keine Aufgaben mehr da!\nWiederhole eine Aufgabe, füge eine eigene hinzu\noder versuch ein paar andere Kategorien!</string>
+    <string name="lvl_caps">"LEVEL: "</string>
 </resources>

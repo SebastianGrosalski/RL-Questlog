@@ -98,7 +98,7 @@ class SettingsFragment : Fragment() {
                     && !binding.cbHealth.isChecked
                     && !binding.cbKnowledge.isChecked
                     && !binding.cbFitness.isChecked
-                    && !binding.cbDiet.isChecked)
+                    && !binding.cbTidiness.isChecked)
 
     private fun containsName() = (
             binding.etName.text.toString().trim().isNotEmpty()

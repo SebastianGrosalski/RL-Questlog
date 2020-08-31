@@ -21,8 +21,7 @@ class PreferenceProvider(context: Context) {
         sharedPreferences.edit().putString(
             NAME,
             string
-        ).commit()
-        sharedPreferences.edit().clear()
+        ).apply()
     }
 
     fun getPoints(key: String) : Int{
@@ -32,7 +31,7 @@ class PreferenceProvider(context: Context) {
     fun putPoints(levelKey : String, pointsKey : String, points: Int){
         val oldPoints : Int = sharedPreferences.getInt(pointsKey, 0)
         var newPoints = oldPoints + points
-        var levelBarrier = calculateLevelBarrier(levelKey)
+        val levelBarrier = calculateLevelBarrier(levelKey)
         if(newPoints >= levelBarrier){
             newPoints %= levelBarrier
             levelUp(levelKey)
@@ -40,7 +39,7 @@ class PreferenceProvider(context: Context) {
         sharedPreferences.edit().putInt(
             pointsKey,
             newPoints
-        ).commit()
+        ).apply()
     }
 
     fun calculateLevelBarrier(key : String) : Int{
@@ -55,13 +54,13 @@ class PreferenceProvider(context: Context) {
 
     fun levelUp(key: String){
         val oldLevel = sharedPreferences.getInt(key, 0)
-        sharedPreferences.edit().putInt(key, oldLevel+1).commit()
+        sharedPreferences.edit().putInt(key, oldLevel+1).apply()
     }
 
     fun putPreferredTopics(topicMap : HashMap<String, Boolean>){
         for(s : String in topicMap.keys)
         {
-            sharedPreferences.edit().putBoolean(s, topicMap[s]!!).commit()
+            sharedPreferences.edit().putBoolean(s, topicMap[s]!!).apply()
         }
     }
 
@@ -69,7 +68,7 @@ class PreferenceProvider(context: Context) {
         sharedPreferences.edit().putBoolean(
             CONTAINS_PREFERENCES,
             true
-        ).commit()
+        ).apply()
     }
 
     fun levelAll(){
@@ -94,7 +93,7 @@ class PreferenceProvider(context: Context) {
         if(getDiet()!!){
             topicsList.add(DIET)
         }
-        if(getKnowledge()!!){
+        if(getKnowledge()){
             topicsList.add(KNOWLEDGE)
         }
         if(getFitness()!!){

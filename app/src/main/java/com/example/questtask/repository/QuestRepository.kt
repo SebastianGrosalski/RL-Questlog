@@ -5,19 +5,19 @@ import com.example.questtask.repository.room.Quest
 import com.example.questtask.repository.room.QuestDao
 
 class QuestRepository(private val dao: QuestDao) {
-        suspend fun insert(quest: Quest){
+        fun insert(quest: Quest){
             dao.insert(quest)
         }
 
-        suspend fun questByTopics(topics: List<String>) : List<Quest>{
+        fun questByTopics(topics: List<String>) : List<Quest>{
             return dao.questByTopics(topics)
         }
 
-        suspend fun questByTopicsDone(topics: List<String>) : List<Quest>{
+        fun questByTopicsDone(topics: List<String>) : List<Quest>{
             return dao.questByTopicsDone(topics)
         }
 
-        suspend fun resetQuest(id: Int){
+        fun resetQuest(id: Int){
             dao.resetQuest(id)
         }
 
@@ -25,11 +25,11 @@ class QuestRepository(private val dao: QuestDao) {
             return dao.questById(id)
         }
 
-        suspend fun setAccepted(id: Int){
+        fun setAccepted(id: Int){
             dao.setAccepted(id)
         }
 
-        suspend fun setDone(id: Int){
+        fun setDone(id: Int){
             dao.setDone(id)
         }
 }

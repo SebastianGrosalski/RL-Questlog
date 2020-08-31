@@ -1,7 +1,6 @@
 package com.example.questtask.ui.questdetail
 
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,13 +10,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 
 import com.example.questtask.R
 import com.example.questtask.databinding.FragmentQuestDetailBinding
 import com.example.questtask.repository.room.Quest
 import com.example.questtask.util.*
-import kotlinx.android.synthetic.main.fragment_quest_detail.*
 import kotlinx.coroutines.launch
 
 class QuestDetailFragment : Fragment() {
@@ -95,33 +92,33 @@ class QuestDetailFragment : Fragment() {
             binding.btnSubmit.visibility = View.GONE
         }
 
-        binding.btnAccept.setOnClickListener(View.OnClickListener {
+        binding.btnAccept.setOnClickListener {
             viewModel.uiScope.launch {
                 viewModel.ioScope.launch {
                     viewModel.updateAccepted(quest.id)
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())
-        })
+        }
 
-        binding.btnSubmit.setOnClickListener(View.OnClickListener {
+        binding.btnSubmit.setOnClickListener {
             viewModel.uiScope.launch {
                 viewModel.ioScope.launch {
                     Log.i("QUESTDETAILFRAGMENT", "QUEST ABGEGEBEN: ${quest.difficulty?.times(10)!!}")
-                    viewModel.questDone(quest.id, quest.topic!!, quest.difficulty.times(10)!!)
+                    viewModel.questDone(quest.id, quest.topic!!, quest.difficulty.times(10))
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())
-        })
+        }
 
-        binding.btnRepeat.setOnClickListener(View.OnClickListener {
+        binding.btnRepeat.setOnClickListener {
             viewModel.uiScope.launch {
                 viewModel.ioScope.launch {
                     viewModel.resetQuest(quest.id)
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())
-        })
+        }
         return binding.root
     }
 }
