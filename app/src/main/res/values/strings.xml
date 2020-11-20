@@ -32,4 +32,6 @@
     <string name="f_progress">Fortschritt</string>
     <string name="no_quests_available">Keine Aufgaben mehr da!\nWiederhole eine Aufgabe, füge eine eigene hinzu\noder versuch ein paar andere Kategorien!</string>
     <string name="lvl_caps">"LEVEL: "</string>
+    <string name="register">Registrieren</string>
+    <string name="login">Login</string>
 </resources>

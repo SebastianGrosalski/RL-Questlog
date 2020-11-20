@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -15,13 +16,16 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.questtask.repository.PreferenceProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -40,11 +44,15 @@ class MainActivity : AppCompatActivity() {
         val graph : NavGraph = navInflater.inflate(R.navigation.mobile_navigation)
 
         val prefProvider = PreferenceProvider(applicationContext)
+        mAuth = Firebase.auth
 
         if(!prefProvider.getContainsFlag()){
             graph.startDestination = R.id.helloFragment
         } else {
             graph.startDestination = R.id.questFragment
+        }
+        if(mAuth.currentUser == null){
+            graph.startDestination = R.id.authenticationSelectFragment
         }
         navController.graph = graph
     }
@@ -58,6 +66,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
            R.id.action_preferences -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_settingsFragment)
+            R.id.action_logout -> {
+                Firebase.auth.signOut()
+                Toast.makeText(this.applicationContext, "Ausgeloggt.", Toast.LENGTH_SHORT).show()
+                findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_authenticationSelectFragment)
+            }
             else -> super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)

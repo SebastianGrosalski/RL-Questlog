@@ -6,4 +6,10 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/outline_settings_white_18dp"
         android:title="@string/overflow_pref" />
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_ausloggen"
+        android:title="Logout"
+        android:iconTint="@color/White"
+        app:showAsAction="ifRoom" />
 </menu>
