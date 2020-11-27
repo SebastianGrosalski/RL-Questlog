@@ -32,4 +32,8 @@ class QuestRepository(private val dao: QuestDao) {
         fun setDone(id: Int){
             dao.setDone(id)
         }
+
+        fun dropQuests(){
+            dao.nukeTable()
+        }
 }

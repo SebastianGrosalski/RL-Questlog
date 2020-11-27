@@ -108,8 +108,17 @@ class QuestDetailFragment : Fragment() {
                 }
             }
             dialog.setPositiveButton("Teilen"){
-                _, _ ->
+                _, _ ->  FirebaseRepository.shareQuest(quest, friend!!)
             }
+
+                .setNegativeButton("Abbrechen"){
+                    _,_ ->
+                }.create()
+            dialog.show()
+        }
+
+        binding.btnShare.setOnClickListener{
+            buildShareDialog()
         }
 
         //Visibility Settings for Detailbutton//
@@ -133,6 +142,9 @@ class QuestDetailFragment : Fragment() {
             viewModel.uiScope.launch {
                 viewModel.ioScope.launch {
                     viewModel.updateAccepted(quest.id)
+                    quest.accepted = true
+                    quest.done = false
+                    FirebaseRepository.updateQuest(quest)
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())
@@ -143,6 +155,9 @@ class QuestDetailFragment : Fragment() {
                 viewModel.ioScope.launch {
                     Log.i("QUESTDETAILFRAGMENT", "QUEST ABGEGEBEN: ${quest.difficulty?.times(10)!!}")
                     viewModel.questDone(quest.id, quest.topic!!, quest!!.difficulty!!.times(10))
+                    quest.done = true
+                    quest.accepted = false
+                    FirebaseRepository.updateQuest(quest)
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())
@@ -152,6 +167,9 @@ class QuestDetailFragment : Fragment() {
             viewModel.uiScope.launch {
                 viewModel.ioScope.launch {
                     viewModel.resetQuest(quest.id)
+                    quest.done = false
+                    quest.accepted = false
+                    FirebaseRepository.updateQuest(quest)
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())

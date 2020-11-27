@@ -18,6 +18,6 @@ data class Quest(
     val description_long : String? = "",
     val topic : String? = "",
     val difficulty : Int? = 0,
-    val done : Boolean? = false,
-    val accepted : Boolean? = false
+    var done : Boolean? = false,
+    var accepted : Boolean? = false
 ) : Serializable

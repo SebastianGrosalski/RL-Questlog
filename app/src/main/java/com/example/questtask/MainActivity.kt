@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.MainThread
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,15 +17,21 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.questtask.repository.PreferenceProvider
+import com.example.questtask.repository.QuestRepository
 import com.example.questtask.repository.firebase.FirebaseRepository
+import com.example.questtask.repository.room.QuestDao
+import com.example.questtask.repository.room.QuestDatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var firebaseRepo : FirebaseRepository
+    private lateinit var repository : QuestRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
+        val questDao = QuestDatabase.getInstance(application).questDatabaseDao
+        repository = QuestRepository(questDao)
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.questFragment, R.id.doneQuestsFragment, R.id.progressFragment, R.id.friendListFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -76,6 +84,13 @@ class MainActivity : AppCompatActivity() {
                 findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_authenticationSelectFragment)
             }
             R.id.action_addFriend -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_addFriendFragment)
+            R.id.action_cloud -> GlobalScope.launch {
+                repository.dropQuests()
+                var questList = FirebaseRepository.getAllQuestsFromUser()
+                for(quest in questList){
+                    repository.insert(quest)
+                }
+            }
             else -> super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)

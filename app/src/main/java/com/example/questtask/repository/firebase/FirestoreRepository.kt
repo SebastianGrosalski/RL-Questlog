@@ -239,8 +239,33 @@ object FirebaseRepository {
         )
     }
 
-    fun shareQuest(){
-        
+    fun shareQuest(quest: Quest, friend : Friend){
+        var sharedQuest = quest
+        sharedQuest.accepted = false
+        sharedQuest.done = false
+
+        usersRef.document(friend.uid).collection("quests").add(
+            sharedQuest
+        )
+    }
+
+    suspend fun getAllQuestsFromUser() : MutableList<Quest>{
+        val listOfQuests : MutableList<Quest> = mutableListOf()
+        val questList = usersRef.document(mAuth.currentUser!!.uid).collection("quests").get().await()
+        for(quest in questList){
+            listOfQuests.add(quest.toObject(Quest::class.java))
+        }
+        return listOfQuests
+    }
+
+    suspend fun updateQuest(quest: Quest) {
+        var questList =
+            usersRef.document(mAuth.currentUser!!.uid).collection("quests").get().await()
+        for (tmpQuest in questList) {
+            if(tmpQuest.get("firestoreId") == quest.firestoreId){
+                tmpQuest.reference.update("accepted", quest.accepted, "done", quest.done)
+            }
+        }
     }
 }
 

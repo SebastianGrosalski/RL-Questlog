@@ -18,4 +18,11 @@
         android:title="Logout"
         android:iconTint="@color/White"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_cloud"
+        android:icon="@drawable/ic_cloud_download_24px"
+        android:title="Datenbank aktualisieren"
+        android:iconTint="@color/White"
+        app:showAsAction="ifRoom" />
 </menu>

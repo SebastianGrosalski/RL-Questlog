@@ -39,4 +39,6 @@ interface QuestDao {
     @Query("SELECT * FROM quest_table WHERE id LIKE (:id)")
     fun questById(id: Int) : Quest
 
+    @Query("DELETE FROM quest_table")
+    fun nukeTable()
 }
