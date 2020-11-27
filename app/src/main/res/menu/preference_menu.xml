@@ -7,6 +7,12 @@
         android:icon="@drawable/outline_settings_white_18dp"
         android:title="@string/overflow_pref" />
     <item
+        android:id="@+id/action_addFriend"
+        android:icon="@drawable/ic_person_add_24px"
+        android:title="Freund hinzufügen"
+        android:iconTint="@color/White"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_ausloggen"
         android:title="Logout"

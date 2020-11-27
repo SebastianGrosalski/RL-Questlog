@@ -11,9 +11,6 @@
         android:label="@string/title_quests"
         tools:layout="@layout/fragment_quests">
         <action
-            android:id="@+id/action_navigation_home_to_helloFragment"
-            app:destination="@id/helloFragment" />
-        <action
             android:id="@+id/action_navigation_home_to_addQuest"
             app:destination="@id/addQuestFragment" />
         <action
@@ -42,13 +39,7 @@
         android:id="@+id/helloFragment"
         android:name="com.example.questtask.ui.hello.HelloFragment"
         android:label="fragment_hello"
-        tools:layout="@layout/fragment_hello" >
-        <action
-            android:id="@+id/action_helloFragment_to_initialPreferences"
-            app:destination="@id/initialPreferences"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
+        tools:layout="@layout/fragment_hello" />
     <fragment
         android:id="@+id/initialPreferences"
         android:name="com.example.questtask.ui.initialPreferences.InitialPreferencesFragment"
@@ -113,10 +104,22 @@
         android:name="com.example.questtask.ui.authenticationEmail.AuthenticationEmailFragment"
         android:label="Mit Email registrieren">
         <action
-            android:id="@+id/action_authenticationEmailFragment_to_helloFragment"
-            app:destination="@id/helloFragment" />
-        <action
-            android:id="@+id/action_authenticationEmailFragment_to_questFragment"
-            app:destination="@id/questFragment" />
+            android:id="@+id/action_authenticationEmailFragment_to_initialPreferences2"
+            app:destination="@id/initialPreferences" />
     </fragment><action android:id="@+id/action_global_authenticationSelectFragment" app:destination="@id/authenticationSelectFragment"/>
+    <fragment
+        android:id="@+id/addFriendFragment"
+        android:name="com.example.questtask.ui.addFriend.AddFriendFragment"
+        android:label="Freundschaftsanfragen"
+        tools:layout="@layout/add_friend_fragment" />
+    <action
+        android:id="@+id/action_global_addFriendFragment"
+        app:destination="@id/addFriendFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
+    <fragment
+        android:id="@+id/friendListFragment"
+        android:name="com.example.questtask.ui.friendList.FriendListFragment"
+        android:label="Freunde"
+        tools:layout="@layout/friend_list_fragment" />
 </navigation>

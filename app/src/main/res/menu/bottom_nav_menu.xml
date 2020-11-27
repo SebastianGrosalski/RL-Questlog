@@ -16,4 +16,10 @@
         android:icon="@drawable/ic_trending_up_24px"
         android:title="@string/f_progress" />
 
+    <item
+        android:id="@+id/friendListFragment"
+        android:icon="@drawable/ic_person_24px"
+        android:title="Freunde"
+    />
+
 </menu>

@@ -1,5 +1,6 @@
 package com.example.questtask.ui.questdetail
 
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -7,12 +8,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.example.questtask.R
 import com.example.questtask.databinding.FragmentQuestDetailBinding
+import com.example.questtask.repository.classes.Friend
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.example.questtask.repository.room.Quest
 import com.example.questtask.util.*
 import kotlinx.coroutines.launch
@@ -39,6 +45,8 @@ class QuestDetailFragment : Fragment() {
             container,
             false
         )
+
+        binding.tvFromUser.text = quest.from
 
         binding.detailTitle.text = quest.title
         when (quest.difficulty){
@@ -76,6 +84,34 @@ class QuestDetailFragment : Fragment() {
             return quest.difficulty!!.times(10)
         }
 
+        fun buildShareDialog(){
+            val builder = AlertDialog.Builder(activity)
+            val dialog = builder.setTitle("Teilen mit:")
+
+            val view = layoutInflater.inflate(R.layout.dialog_share, null)
+            builder.setView(view)
+            val spinner = view.findViewById<Spinner>(R.id.dialog_spinner)
+
+            viewModel.uiScope.launch {
+                val friendList = FirebaseRepository.getAllFriends()
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, friendList)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+            }
+
+            var friend : Friend? = null
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
+                    friend = parent?.getItemAtPosition(position) as Friend
+                }
+            }
+            dialog.setPositiveButton("Teilen"){
+                _, _ ->
+            }
+        }
+
         //Visibility Settings for Detailbutton//
         binding.tvPoints.text = getPointAmount(quest).toString()
         if(quest.accepted == false){
@@ -106,7 +142,7 @@ class QuestDetailFragment : Fragment() {
             viewModel.uiScope.launch {
                 viewModel.ioScope.launch {
                     Log.i("QUESTDETAILFRAGMENT", "QUEST ABGEGEBEN: ${quest.difficulty?.times(10)!!}")
-                    viewModel.questDone(quest.id, quest.topic!!, quest.difficulty.times(10))
+                    viewModel.questDone(quest.id, quest.topic!!, quest!!.difficulty!!.times(10))
                 }
             }
             findNavController().navigate(QuestDetailFragmentDirections.actionQuestDetailFragmentToQuestFragment())

@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.questtask.repository.PreferenceProvider
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -23,6 +24,7 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var firebaseRepo : FirebaseRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.questFragment, R.id.doneQuestsFragment, R.id.progressFragment))
+                R.id.questFragment, R.id.doneQuestsFragment, R.id.progressFragment, R.id.friendListFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         // Set up different fragments as entry point for the app
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         val prefProvider = PreferenceProvider(applicationContext)
         mAuth = Firebase.auth
+        firebaseRepo = FirebaseRepository
 
         if(!prefProvider.getContainsFlag()){
             graph.startDestination = R.id.helloFragment
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         if(mAuth.currentUser == null){
             graph.startDestination = R.id.authenticationSelectFragment
         }
+
         navController.graph = graph
     }
 
@@ -71,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this.applicationContext, "Ausgeloggt.", Toast.LENGTH_SHORT).show()
                 findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_authenticationSelectFragment)
             }
+            R.id.action_addFriend -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_addFriendFragment)
             else -> super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)

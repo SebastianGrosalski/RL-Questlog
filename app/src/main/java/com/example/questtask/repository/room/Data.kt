@@ -5,18 +5,19 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 import org.threeten.bp.OffsetDateTime
+import java.io.Serializable
 import java.util.*
 
 @Entity(tableName = "quest_table")
 data class Quest(
-    @PrimaryKey(autoGenerate = true) var id: Int,
-    var title : String?,
-    val description_short : String?,
-    val description_long : String?,
-    val topic : String?,
-    val difficulty : Int?,
-    val startDate : OffsetDateTime? = null,
-    val endDate : OffsetDateTime? = null,
-    val done : Boolean?,
-    val accepted : Boolean?
-)
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    var firestoreId : String? = "",
+    var from: String = "",
+    var title : String? = "",
+    val description_short : String? = "",
+    val description_long : String? = "",
+    val topic : String? = "",
+    val difficulty : Int? = 0,
+    val done : Boolean? = false,
+    val accepted : Boolean? = false
+) : Serializable

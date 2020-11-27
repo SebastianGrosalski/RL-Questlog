@@ -114,6 +114,7 @@ class SettingsFragment : Fragment() {
         map[FITNESS] = binding.cbFitness.isChecked
         map[DIET] = binding.cbDiet.isChecked
         viewModel.prefProvider.putPreferredTopics(map)
+        viewModel.firebaseRepo.updatePreferredTopics(map)
     }
 
     private fun saveData(){
@@ -130,6 +131,7 @@ class SettingsFragment : Fragment() {
         else {
             mapToPref()
             viewModel.prefProvider.putName(binding.etName.text.toString())
+            viewModel.firebaseRepo.updateUserName(binding.etName.text.toString())
             Toast.makeText(this.context,
             "Änderungen gespeichert!",
             Toast.LENGTH_SHORT).show()

@@ -2,6 +2,9 @@ package com.example.questtask.util
 
 import android.graphics.Color
 
+//FLAG FOR FIRESTORE FETCH
+const val DATABASE_EXISTS = "db_exists"
+
 //Topics for preferences//
 const val TIDINESS = "tidiness"
 const val KNOWLEDGE = "knowledge"

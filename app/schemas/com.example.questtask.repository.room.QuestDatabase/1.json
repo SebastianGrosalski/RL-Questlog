@@ -2,16 +2,28 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d84c024715be021d7bc584858de235f9",
+    "identityHash": "bc7a0e1bcd00c8c30c1fced357e56163",
     "entities": [
       {
         "tableName": "quest_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description_short` TEXT, `description_long` TEXT, `topic` TEXT, `difficulty` INTEGER, `startDate` TEXT, `endDate` TEXT, `done` INTEGER, `accepted` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `firestoreId` TEXT, `from` TEXT NOT NULL, `title` TEXT, `description_short` TEXT, `description_long` TEXT, `topic` TEXT, `difficulty` INTEGER, `done` INTEGER, `accepted` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firestoreId",
+            "columnName": "firestoreId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "from",
+            "columnName": "from",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -45,18 +57,6 @@
             "notNull": false
           },
           {
-            "fieldPath": "startDate",
-            "columnName": "startDate",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "endDate",
-            "columnName": "endDate",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "done",
             "columnName": "done",
             "affinity": "INTEGER",
@@ -82,7 +82,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd84c024715be021d7bc584858de235f9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bc7a0e1bcd00c8c30c1fced357e56163')"
     ]
   }
 }

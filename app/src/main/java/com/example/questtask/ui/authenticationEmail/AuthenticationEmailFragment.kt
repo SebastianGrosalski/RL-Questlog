@@ -14,19 +14,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.questtask.R
 import com.example.questtask.databinding.FragmentAuthenticationEmailBinding
+import com.example.questtask.repository.firebase.FirebaseAuthenticate
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class AuthenticationEmailFragment : Fragment() {
-    private lateinit var mAuth : FirebaseAuth
     companion object {
         fun newInstance() = AuthenticationEmailFragment()
     }
 
     private lateinit var viewmodel: AuthenticationEmailViewModel
     private lateinit var binding: FragmentAuthenticationEmailBinding
+    private lateinit var firebaseRepo: FirebaseRepository
+    private lateinit var firebaseAuth: FirebaseAuthenticate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,7 @@ class AuthenticationEmailFragment : Fragment() {
         val navBar: BottomNavigationView =
             (activity as AppCompatActivity).findViewById(R.id.nav_view)
         navBar.isVisible = false
-
+        firebaseAuth = FirebaseAuthenticate
         viewmodel = ViewModelProvider(this).get(AuthenticationEmailViewModel::class.java)
 
         binding = DataBindingUtil.inflate(
@@ -44,43 +47,34 @@ class AuthenticationEmailFragment : Fragment() {
             container,
             false
         )
-        mAuth = Firebase.auth
 
+        firebaseRepo = FirebaseRepository
         binding.btnRegister.setOnClickListener{
-            if(!containsEmail()){
-                Toast.makeText(this.context, "Du musst eine E-Mail angeben!", Toast.LENGTH_SHORT).show()
+            if(!containsEmail()) {
+                Toast.makeText(this.context, "Du musst eine E-Mail angeben!", Toast.LENGTH_SHORT)
+                    .show()
+            } else if (!containsName()){
+                Toast.makeText(this.context, "Du musst einen Namen angeben!", Toast.LENGTH_SHORT).show()
             } else if (!containsPasswords()){
                 Toast.makeText(this.context, "Du musst ein Passwort angeben!", Toast.LENGTH_SHORT).show()
             } else if(!passwordsAreEqual()){
                 Toast.makeText(this.context, "Deine Passwörter stimmen nicht überein!", Toast.LENGTH_SHORT).show()
             } else if(containsEmail() && passwordsAreEqual() && containsPasswords()){
-                var email = binding.leEmail.text.toString()
-                var password = binding.pwField.text.toString()
-                createAccountWithEmail(email, password)
+                var email = binding.leEmail.text.toString().trim()
+                var name = binding.etUsername.text.toString().trim()
+                var password = binding.pwField.text.toString().trim()
+                createAccountWithEmail(email, password, name)
             }
         }
         return binding.root
     }
 
-    private fun createAccountWithEmail(email: String, password: String){
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.i("Authentication", "createUserWithEmail:success")
-                    Toast.makeText(this.context, "Erfolgreich registriert!", Toast.LENGTH_SHORT).show()
-                    if(viewmodel.prefProvider.getContainsFlag()){
-                        this.findNavController().navigate(AuthenticationEmailFragmentDirections.actionAuthenticationEmailFragmentToQuestFragment())
-                    } else {
-                        this.findNavController().navigate(AuthenticationEmailFragmentDirections.actionAuthenticationEmailFragmentToHelloFragment())
-                    }
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.i("Authentication", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(this.context,"Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
+    private fun createAccountWithEmail(email: String, password: String, name: String){
+        firebaseAuth.createAccountWithEmail(email, password, name)
+        viewmodel.prefProvider.putName(name)
+        this.findNavController().navigate(AuthenticationEmailFragmentDirections.actionAuthenticationEmailFragmentToInitialPreferences2())
     }
+
     private fun containsEmail(): Boolean{
         return (
     binding.leEmail.text.toString().trim().isNotEmpty()
@@ -96,5 +90,8 @@ class AuthenticationEmailFragment : Fragment() {
         return binding.pwField.text.toString() == binding.pwFieldRepeat.text.toString()
     }
 
-
+    private fun containsName() : Boolean{
+        return binding.etUsername.text.toString().trim().isNotEmpty() ||
+                binding.etUsername.text.toString().trim().isNotBlank()
+    }
 }

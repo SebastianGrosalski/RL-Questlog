@@ -24,8 +24,7 @@ abstract val questDatabaseDao : QuestDao
                         context.applicationContext,
                         QuestDatabase::class.java,
                         "quest_database"
-                    ).createFromAsset("initialQuests.db")
-                        .build()
+                    ).build()
                     INSTANCE = instance
                 }
                 return instance

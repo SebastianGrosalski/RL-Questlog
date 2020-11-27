@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.questtask.repository.QuestRepository
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.example.questtask.repository.room.Quest
 import com.example.questtask.repository.room.QuestDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -51,5 +52,6 @@ class AddQuestViewModel(application: Application) : AndroidViewModel(application
 
     suspend fun addQuest(quest: Quest){
         repository.insert(quest)
+        FirebaseRepository.writeQuestToFirestore(quest)
     }
 }

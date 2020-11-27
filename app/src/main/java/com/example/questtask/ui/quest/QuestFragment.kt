@@ -15,18 +15,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.questtask.R
 import com.example.questtask.databinding.FragmentQuestsBinding
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.example.questtask.repository.room.QuestDatabase
 import com.example.questtask.ui.quest.recyclerview.QuestAdapter
 import com.example.questtask.ui.quest.recyclerview.QuestListener
 import com.example.questtask.util.LEVEL
 import com.example.questtask.util.POINTS
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class QuestFragment : Fragment() {
 
     private lateinit var viewModel: QuestViewModel
     private lateinit var binding: FragmentQuestsBinding
+    private lateinit var firebaseRepo : FirebaseRepository
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -38,13 +41,19 @@ class QuestFragment : Fragment() {
         navBar.isVisible = true
 
         viewModel = ViewModelProvider(this).get(QuestViewModel::class.java)
-
+        firebaseRepo = FirebaseRepository
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_quests,
             container,
             false
         )
+
+        if(!viewModel.prefProvider.getInitialQuestsSet()){
+            viewModel.uiScope.launch {
+                viewModel.getQuestsAndWriteToFirestore()
+            }
+        }
 
         //Setup of status bar beneath app-bar
         binding.progressXp.max = viewModel.prefProvider.calculateLevelBarrier(LEVEL)

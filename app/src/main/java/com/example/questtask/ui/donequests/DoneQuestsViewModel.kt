@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.questtask.repository.PreferenceProvider
 import com.example.questtask.repository.QuestRepository
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.example.questtask.repository.room.Quest
 import com.example.questtask.repository.room.QuestDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class DoneQuestsViewModel(application: Application) : AndroidViewModel(application) {
     private val repository : QuestRepository
+    private val firebaseRepo : FirebaseRepository = FirebaseRepository
     init{
         val questDao = QuestDatabase.getInstance(application).questDatabaseDao
         repository = QuestRepository(questDao)

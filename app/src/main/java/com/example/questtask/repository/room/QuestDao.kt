@@ -2,14 +2,11 @@ package com.example.questtask.repository.room
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface QuestDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(quest: Quest)
 
     @Query("UPDATE quest_table SET accepted = 1 WHERE id LIKE (:id)")

@@ -19,9 +19,13 @@ import com.example.questtask.R
 
 import com.example.questtask.databinding.FragmentAddQuestBinding
 import com.example.questtask.repository.QuestRepository
+import com.example.questtask.repository.firebase.FirebaseAuthenticate
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.example.questtask.repository.room.Quest
 import com.example.questtask.repository.room.QuestDatabase
 import com.example.questtask.util.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_add_quest.*
 import kotlinx.coroutines.launch
 
@@ -41,7 +45,7 @@ class AddQuestFragment : Fragment() {
         )
 
         viewModel = ViewModelProvider(this).get(AddQuestViewModel::class.java)
-
+        val mAuth = Firebase.auth
         //Spinner for topic
         ArrayAdapter.createFromResource(
             this?.requireContext(),
@@ -174,15 +178,13 @@ class AddQuestFragment : Fragment() {
                         viewModel.addQuest(
                             Quest(
                                 0,
-                                viewModel.questTitle,
-                                viewModel.questShortDesc,
-                                viewModel.questLongDesc,
-                                viewModel.questTopic,
-                                viewModel.questDifficulty,
-                                null,
-                                null,
-                                done = false,
-                                accepted = false
+                                title = viewModel.questTitle,
+                                description_short = viewModel.questShortDesc,
+                                description_long = viewModel.questLongDesc,
+                                topic = viewModel.questTopic,
+                                from = FirebaseRepository.getNameById(mAuth.currentUser!!.uid),
+                                difficulty = viewModel.questDifficulty,
+                                firestoreId = (mAuth.currentUser!!.uid.toString() + id)
                             )
                         )
                     }

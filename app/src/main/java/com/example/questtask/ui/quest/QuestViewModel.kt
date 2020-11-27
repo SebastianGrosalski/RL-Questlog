@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.questtask.repository.PreferenceProvider
 import com.example.questtask.repository.QuestRepository
+import com.example.questtask.repository.firebase.FirebaseRepository
 import com.example.questtask.repository.room.Quest
 import com.example.questtask.repository.room.QuestDao
 import com.example.questtask.repository.room.QuestDatabase
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 
 class QuestViewModel(application : Application) : AndroidViewModel(application) {
     private val repository : QuestRepository
+    private val firestoreRepo : FirebaseRepository = FirebaseRepository
     init{
         val questDao = QuestDatabase.getInstance(application).questDatabaseDao
         repository = QuestRepository(questDao)
@@ -54,6 +56,11 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
         _navigate.value = true
     }
 
+    suspend fun getQuestsAndWriteToFirestore(){
+        FirebaseRepository.writeInitialQuestsToUser(FirebaseRepository.getInitialQuests())
+        prefProvider.putInitialQuestsSet()
+    }
+
     fun doneNavigating(){
         _navigate.value = false
     }
@@ -72,6 +79,12 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
               return _xp.value!!
     }
 
+    fun generateInitialQuests(){
+        if(!prefProvider.getInitialDataFlag()){
+
+        }
+    }
+
     fun setQuests(){
         questList = prefProvider.getTopicsList()
         uiScope.launch {
@@ -79,6 +92,7 @@ class QuestViewModel(application : Application) : AndroidViewModel(application) 
                 _quests.postValue(repository.questByTopics(questList))
             }
         }
+
     }
 
     override fun onCleared() {

@@ -9,7 +9,7 @@ import com.example.questtask.util.*
 private const val NAME = "name"
 //Flag to determine if hellofragment and initialpreferences-fragments are shown
 private const val CONTAINS_PREFERENCES = "containsPreferences"
-
+private const val WRITTENTOFIRESTORE = "writtenToFirestore"
 /* ####################################################
     PreferenceProvider is used for unified usage of shared
     preferences along all viewmodels and fragments
@@ -143,5 +143,25 @@ class PreferenceProvider(context: Context) {
 
     fun getKnowledge() : Boolean{
         return sharedPreferences.getBoolean(KNOWLEDGE, false)
+    }
+
+    fun putInitialQuestsSet(){
+        sharedPreferences.edit().putBoolean(WRITTENTOFIRESTORE, true).apply()
+    }
+
+    fun getInitialQuestsSet() : Boolean{
+        return sharedPreferences.getBoolean(WRITTENTOFIRESTORE, false)
+    }
+
+    fun putInitialDataFlag(value: Boolean){
+        sharedPreferences.edit().putBoolean(DATABASE_EXISTS, value).apply()
+    }
+
+    fun getInitialDataFlag() : Boolean{
+       return sharedPreferences.getBoolean(DATABASE_EXISTS, false)
+    }
+
+    fun dropAll(){
+
     }
 }

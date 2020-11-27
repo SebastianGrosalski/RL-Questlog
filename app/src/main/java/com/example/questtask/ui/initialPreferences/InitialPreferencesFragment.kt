@@ -19,6 +19,8 @@ import com.example.questtask.databinding.FragmentInitialPreferencesBinding
 import com.example.questtask.util.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_initial_preferences.*
 
 
@@ -35,12 +37,14 @@ class InitialPreferencesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val mAuth = Firebase.auth
         // Hide the App bar
         (activity as AppCompatActivity).supportActionBar?.hide()
         // Hide the BottomNavigation for this Fragment
         val navBar: BottomNavigationView = (activity as AppCompatActivity).findViewById(R.id.nav_view)
         navBar.isVisible = false
         // Get the ViewModel
+
         viewModel = ViewModelProvider(this).get(InitialPreferencesViewModel::class.java)
         binding = DataBindingUtil.inflate(
             inflater,
@@ -48,7 +52,7 @@ class InitialPreferencesFragment : Fragment() {
             container,
             false
         )
-
+        viewModel.setInitialQuests()
         binding.viewModel = viewModel
 
         viewModel.navigate.observe(viewLifecycleOwner, Observer{
@@ -80,6 +84,7 @@ class InitialPreferencesFragment : Fragment() {
         map[FITNESS] = binding.cbFitness.isChecked
         map[DIET] = binding.cbDiet.isChecked
         viewModel.putTopics(map)
+        viewModel.loadToFirestore(map)
     }
 
     // Make App-bar and bottom navigation visible when navigating to home-fragment
