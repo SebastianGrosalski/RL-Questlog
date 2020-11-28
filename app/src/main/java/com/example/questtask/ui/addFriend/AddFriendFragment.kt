@@ -47,7 +47,7 @@ class AddFriendFragment : Fragment() {
             if(it){
                 Toast.makeText(context, "Freundschaftsanfrage versendet!", Toast.LENGTH_SHORT).show()
             } else
-                Toast.makeText(context, "MIAUUUUU NEIN", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Freundschaftsanfrage wurde nicht versendet. Hast du bereits eine Anfrage an diesen Nutzer geschickt?", Toast.LENGTH_SHORT).show()
             }
         })
         binding.pendingRequests.adapter = adapter
