@@ -153,7 +153,9 @@ object FirebaseRepository {
     fun acceptFriendRequest(friendRequest: FriendRequest) {
         friendRequestsRef.whereEqualTo("receiver", friendRequest.receiver)
             .whereEqualTo("sender", friendRequest.sender)
-            .whereEqualTo("senderEmail", friendRequest.senderEmail).get().addOnSuccessListener {
+            .whereEqualTo("senderEmail", friendRequest.senderEmail)
+            .get()
+            .addOnSuccessListener {
                 for (document in it) {
                     friendRequestsRef.document(document.id).update("status", "accepted")
                 }
